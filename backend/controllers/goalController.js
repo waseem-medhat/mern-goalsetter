@@ -1,11 +1,11 @@
-const asyncHandler = require('express-async-handler')
-const Goal = require('../models/goalModel')
-const User = require('../models/userModel')
+import asyncHandler from "express-async-handler"
+import Goal from "../models/goalModel.js"
+import User from "../models/userModel.js"
 
 // @desc   Get goals
 // @route  GET /api/goals
 // @access Private
-const getGoals = asyncHandler(async (req, res) => {
+export const getGoals = asyncHandler(async (req, res) => {
     const goals = await Goal.find({ user: req.user.id })
     res.status(200).json(goals)
 })
@@ -13,7 +13,7 @@ const getGoals = asyncHandler(async (req, res) => {
 // @desc   Set a goal
 // @route  POST /api/goals
 // @access Private
-const setGoal = asyncHandler(async (req, res) => {
+export const setGoal = asyncHandler(async (req, res) => {
     if (!req.body.text) {
         res.status(400)
         throw new Error("Please add text")
@@ -30,7 +30,7 @@ const setGoal = asyncHandler(async (req, res) => {
 // @desc   Update a goal
 // @route  PUT /api/goals/:id
 // @access Private
-const updateGoal = asyncHandler(async (req, res) => {
+export const updateGoal = asyncHandler(async (req, res) => {
     const goal = await Goal.findById(req.params.id)
     const user = await User.findById(req.user.id)
 
@@ -57,7 +57,7 @@ const updateGoal = asyncHandler(async (req, res) => {
 // @desc   Delete a goal
 // @route  DELETE /api/goals/:id
 // @access Private
-const deleteGoal = asyncHandler(async (req, res) => {
+export const deleteGoal = asyncHandler(async (req, res) => {
     if (!req.params.id) {
         res.status(400)
         throw new Error("No ID provided")
@@ -83,10 +83,3 @@ const deleteGoal = asyncHandler(async (req, res) => {
 
     res.status(200).json({ message: "deleted" })
 })
-
-module.exports = {
-    getGoals,
-    setGoal,
-    updateGoal,
-    deleteGoal
-}

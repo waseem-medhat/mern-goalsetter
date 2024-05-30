@@ -1,6 +1,7 @@
 {
   "name": "mern-goalsetter",
   "version": "1.0.0",
+  "type": "module",
   "description": "Goalsetter app",
   "main": "server.js",
   "scripts": {
