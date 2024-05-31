@@ -1,6 +1,6 @@
 import express from "express"
-import _ from "colors"
-import dotenv from "dotenv"
+import "colors"
+import * as dotenv from "dotenv"
 import { errorHandler } from "./middleware/errorMiddleware.js"
 import connectDB from "./config/db.js"
 import goalRouter from "./routes/goalRoutes.js"
