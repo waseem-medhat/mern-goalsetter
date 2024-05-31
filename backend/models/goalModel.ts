@@ -1,8 +1,15 @@
-import mongoose from "mongoose"
+import mongoose, { Schema, Document } from "mongoose"
 
-const goalSchema = mongoose.Schema({
+interface IGoal extends Document {
+    user: Schema.Types.ObjectId
+    text: String
+    createdAt: Date
+    updatedAt: Date
+}
+
+const goalSchema = new Schema({
     user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         required: true,
     },
     text: {
@@ -14,4 +21,4 @@ const goalSchema = mongoose.Schema({
     timestamps: true
 })
 
-export default mongoose.model('Goal', goalSchema)
+export default mongoose.model<IGoal>('Goal', goalSchema)

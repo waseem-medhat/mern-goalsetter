@@ -7,8 +7,9 @@ import goalRouter from "./routes/goalRoutes.js"
 import userRouter from "./routes/userRoutes.js"
 
 dotenv.config()
-const port = process.env.PORT || 5000
 connectDB()
+
+const port = process.env.PORT || 5000
 const app = express()
 
 app.use(express.urlencoded({ extended: false }))

@@ -44,7 +44,7 @@ export const updateGoal = asyncHandler(async (req, res) => {
         throw new Error("Unauthorized! User not found")
     }
 
-    if (goal.user.toString() !== user.id) {
+    if (goal && goal.user.toString() !== user.id) {
         res.status(401)
         throw new Error("Unauthorized user!")
     }
@@ -71,7 +71,7 @@ export const deleteGoal = asyncHandler(async (req, res) => {
         throw new Error("Unauthorized! User not found")
     }
 
-    if (goal.user.toString() !== user.id) {
+    if (goal && goal.user.toString() !== user.id) {
         res.status(401)
         throw new Error("Unauthorized user!")
     }

@@ -2,11 +2,11 @@ import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs"
 import asyncHandler from "express-async-handler"
 import User from "../models/userModel.js"
+import { Request, Response } from "express"
 
-const genToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: '30d',
-    })
+const genToken = (id: string) => {
+    const jwtSecret = process.env.JWT_SECRET || ""
+    return jwt.sign({ id }, jwtSecret, { expiresIn: '30d', })
 }
 
 // @desc   Register user
@@ -72,8 +72,14 @@ export const loginUser = asyncHandler(async (req, res) => {
 // @desc   Get user data
 // @route  GET /api/users/me
 // @access Public
-export const getMe = asyncHandler(async (req, res) => {
-    const { _id, name, email } = await User.findById(req.user.id)
+export const getMe = asyncHandler(async (req: Request, res: Response) => {
+    const { _id, name, email } = await User.findById(req.user.id) ?? {}
+
+    if (!(_id || name || email)) {
+        res.status(404)
+        throw new Error("Not found")
+    }
+
     res.status(200).json({
         id: _id,
         name,

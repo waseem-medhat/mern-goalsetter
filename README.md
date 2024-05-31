@@ -5,4 +5,4 @@ This code is based on a tutorial by Traversy Media: <https://www.youtube.com/pla
 TODO:
 - [x] Complete tutorial
 - [x] Convert CJS to ESM
-- [ ] Convert JS to TS
+- [x] Convert JS to TS
